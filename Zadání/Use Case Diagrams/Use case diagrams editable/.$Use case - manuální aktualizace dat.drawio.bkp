@@ -1,0 +1,104 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.2 Chrome/134.0.6998.178 Electron/35.1.2 Safari/537.36" version="26.2.2">
+  <diagram name="Page-1" id="glBbXT54p4Q-yVnUknxY">
+    <mxGraphModel dx="1095" dy="649" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-1" value="Uživatel" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
+          <mxGeometry x="70" y="160" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-25" value="DanceSport Analyzer Web - Client Side" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
+          <mxGeometry x="130" y="60" width="200" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-29" value="Request na zobrazení základní tabulky s porotci" style="ellipse;whiteSpace=wrap;html=1;" parent="E8rhsb3aOCaVDkDRGNbv-25" vertex="1">
+          <mxGeometry x="24.38" y="60" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-31" value="Zobrazení stránky s tredny" style="ellipse;whiteSpace=wrap;html=1;" parent="E8rhsb3aOCaVDkDRGNbv-25" vertex="1">
+          <mxGeometry x="29.999999999999993" y="250" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-1" value="Nastavení přesné konfigurace - časové omezení, filtry..." style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="E8rhsb3aOCaVDkDRGNbv-25">
+          <mxGeometry x="24.38" y="150" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-2" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="E8rhsb3aOCaVDkDRGNbv-25" source="5smXDKDg5CDrbSM5bVvS-1" target="E8rhsb3aOCaVDkDRGNbv-29">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="267" y="99" as="sourcePoint" />
+            <mxPoint x="186" y="105" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-26" value="DanceSport Analyzer Web - Server Side" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
+          <mxGeometry x="360" y="60" width="200" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-30" value="Zpracování requestu a načtení stránky" style="ellipse;whiteSpace=wrap;html=1;" parent="E8rhsb3aOCaVDkDRGNbv-26" vertex="1">
+          <mxGeometry x="24.380000000000006" y="60" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-9" value="Poslání dat klientovi" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="E8rhsb3aOCaVDkDRGNbv-26">
+          <mxGeometry x="24.379999999999995" y="150" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-27" value="DSAnalyzer service" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
+          <mxGeometry x="590" y="60" width="200" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-3" value="Request na správná data" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="E8rhsb3aOCaVDkDRGNbv-27">
+          <mxGeometry x="24.370000000000005" y="60" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-7" value="Zpracování dat, vypočítání hodnot" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="E8rhsb3aOCaVDkDRGNbv-27">
+          <mxGeometry x="24.379999999999995" y="150" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-28" value="DSAnalyzer service" style="swimlane;whiteSpace=wrap;html=1;startSize=40;" parent="1" vertex="1">
+          <mxGeometry x="820" y="60" width="200" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-5" value="Najití a poslání správných dat" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="E8rhsb3aOCaVDkDRGNbv-28">
+          <mxGeometry x="24.379999999999995" y="60" width="151.25" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="E8rhsb3aOCaVDkDRGNbv-32" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" parent="1" source="E8rhsb3aOCaVDkDRGNbv-30" target="5smXDKDg5CDrbSM5bVvS-1" edge="1">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="488" y="390" as="sourcePoint" />
+            <mxPoint x="363" y="290" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-4" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="1" source="5smXDKDg5CDrbSM5bVvS-3" target="E8rhsb3aOCaVDkDRGNbv-30">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="394" y="165" as="sourcePoint" />
+            <mxPoint x="316" y="255" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-6" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="1" source="5smXDKDg5CDrbSM5bVvS-5" target="5smXDKDg5CDrbSM5bVvS-3">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="624" y="165" as="sourcePoint" />
+            <mxPoint x="546" y="165" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-8" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="1" source="5smXDKDg5CDrbSM5bVvS-7" target="5smXDKDg5CDrbSM5bVvS-5">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="854" y="165" as="sourcePoint" />
+            <mxPoint x="776" y="165" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-10" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="1" source="5smXDKDg5CDrbSM5bVvS-9" target="5smXDKDg5CDrbSM5bVvS-7">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="776" y="255" as="sourcePoint" />
+            <mxPoint x="930" y="200" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-11" value="&amp;lt;&amp;lt;includes&amp;gt;&amp;gt;" style="endArrow=none;dashed=1;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endFill=1;startFill=1;startArrow=classic;" edge="1" parent="1" source="E8rhsb3aOCaVDkDRGNbv-31" target="5smXDKDg5CDrbSM5bVvS-9">
+          <mxGeometry x="0.0056" width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="546" y="255" as="sourcePoint" />
+            <mxPoint x="624" y="255" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5smXDKDg5CDrbSM5bVvS-12" value="" style="endArrow=none;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="E8rhsb3aOCaVDkDRGNbv-1" target="E8rhsb3aOCaVDkDRGNbv-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60" y="350" as="sourcePoint" />
+            <mxPoint x="110" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
