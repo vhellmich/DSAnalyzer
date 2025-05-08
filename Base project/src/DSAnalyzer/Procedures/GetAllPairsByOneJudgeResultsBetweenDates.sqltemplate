@@ -1,0 +1,7 @@
+SELECT [index], round, dance, pairId, marks, endedDance, numberOfCouples FROM 
+(SELECT * FROM IsJudging
+WHERE judgeId = {judgeId}) AS Jud
+INNER JOIN Result ON Result.compId = Jud.compiD
+INNER JOIN Comp ON Comp.id = Jud.compId
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+ORDER BY pairID

@@ -1,0 +1,605 @@
+Between dates:
+SELECT * FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2020-10-04' AND '2020-10-04';
+
+SELECT * FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2020-10-04' AND '2020-10-04' AND Result.round = 1
+ORDER BY id
+
+Judges between dates
+SELECT Comp.id AS compId, IsJudging.judgeId AS judgeId, IsJudging.[index]  FROM Comp
+INNER JOIN IsJudging ON IsJudging.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2020-10-04' AND '2020-10-04'
+ORDER BY id
+
+All judges personal info between dates
+SELECT compId,judgeId,[index],name,surname,state  FROM
+(SELECT Comp.id AS compId, IsJudging.judgeId AS judgeId, IsJudging.[index]  FROM Comp
+INNER JOIN IsJudging ON IsJudging.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2020-10-04' AND '2020-10-04'
+ORDER BY id)
+INNER JOIN Person ON Person.id = judgeId
+GROUP BY judgeId
+
+SELECT Res.compId, judgeId, [index] FROM (SELECT Result.compId,Comp.id  FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to} AND pairId = {pairId}
+ORDER BY id) AS Res
+INNER JOIN IsJudging ON IsJudging.compId = Res.id
+GROUP BY Res.compId, IsJudging.[index]
+ORDER BY compId
+
+SELECT compId, marks, endedDance FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2015-10-04' AND '2024-10-04' AND Result.round = 1
+ORDER BY id
+
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2000-10-04' AND '2040-10-04' AND pairId = 162301
+ORDER BY id
+
+All judges of pair between dates
+SELECT * FROM (SELECT * FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2000-10-04' AND '2040-10-04' AND pairId = 160017
+ORDER BY id) AS Res
+INNER JOIN IsJudging ON IsJudging.compId = Res.id
+GROUP BY Res.compId, IsJudging.[index]
+ORDER BY compId
+
+SELECT Res.compId, judgeId, [index] FROM (SELECT Result.compId,Comp.id  FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN '2000-10-04' AND '2040-10-04' AND pairId = 160017
+ORDER BY id) AS Res
+INNER JOIN IsJudging ON IsJudging.compId = Res.id
+GROUP BY Res.compId, IsJudging.[index]
+ORDER BY res.compId
+
+SELECT pairId, P1.name AS manName, P1.surname AS manSurname, P1.state AS manState, P2.name AS womanName, P2.surname AS womanSurname, P2.state AS womanState FROM (SELECT pairId FROM 
+(SELECT * FROM IsJudging
+WHERE judgeId = 10104002) AS Jud
+INNER JOIN Result ON Result.compId = Jud.compiD
+INNER JOIN Comp ON Comp.id = Jud.compId
+WHERE DATE(Comp.date) BETWEEN '2000-10-04' AND '2026-10-04'
+GROUP BY pairId
+ORDER BY pairId)
+INNER JOIN Pair ON Pair.id = pairId
+INNER JOIN Person AS P1 ON P1.id = Pair.manId
+INNER JOIN Person AS P2 ON P2.id = Pair.womanId
+
+Clear:
+DELETE FROM IsJudging;
+DELETE FROM Result;
+DELETE FROM Judge;
+DELETE FROM Pair;
+DELETE FROM Comp;
+DELETE FROM Event;
+DELETE FROM Club;
+DELETE FROM Person;
+
+
+
+
+
+Name                Surname                       Rating    Sampled
+----------------------------------------------------------------------
+Veronika            Hrubá                         28.43     34
+Antonín             Langr                         21.34     114
+Lenka               Roiková                       19.07     158
+Jakub               Schuller                      18.37     78
+Jan                 Blažek                        17.54     98
+Michal              Němeček                       15.85     992
+Tomáš               Zlámal                        15.18     197
+Rostislav           Neuwirth                      14.79     167
+Oldřich             Holý                          14.68     290
+René                Skalský                       14.50     117
+Petr                Odstrčil                      14.48     992
+Jan                 Jadlovský                     13.99     327
+Jan Carlos          Sekera                        13.50     52
+Simona              Hošková                       13.46     612
+Jiří                Pohlodek                      12.93     2239
+Vlastimil           Mičjan                        12.89     320
+Jaroslava           Žáková                        12.37     709
+Anna                Marek Krátká                  12.19     247
+Pavel               Vild                          12.17     102
+Zuzana              Rybníčková                    12.14     1518
+Šárka               Kosmáková                     11.27     690
+Michal              Varnuška                      11.10     129
+Jaroslav            Novák                         10.97     1477
+Bohumil             Dlouhý                        10.96     4275
+Helena              Březinová                     10.83     353
+Emanuela            Kaucká                        10.83     357
+Tatiana             Dorina                        10.71     780
+Jan                 Plšek                         10.69     1985
+Martin              Paulíny                       10.64     1775
+Veronika            Krejčí                        10.62     488
+Tomáš               Ľudma                         10.61     456
+Kateřina            Krakowková                    10.54     665
+Hana Anna           Šišková                       10.52     1127
+Lucie               Kokotková Buryanová           10.48     650
+Kateřina            Kolmanová                     10.45     2501
+Josef               Kuča                          10.39     137
+Petr                Mertlík                       10.34     1025
+Jana                Jančová                       10.19     2600
+Lucia               Krnčanová                     10.17     1313
+Veronika            Sedlecká                      10.11     128
+Jiří                Ševčík                        10.10     5591
+Marie               Hýžová                        10.00     1395
+Štěpán              Pleyer                        9.92      2693
+Vidašič             Peter                         9.90      610
+Lucie               Hőferová                      9.89      622
+Igor                Henzély                       9.77      4763
+Daniel              Florian                       9.77      368
+Václav              Masaryk                       9.73      599
+Zdenek              Fencak                        9.70      2052
+Petr                Zabystrzan                    9.63      1667
+Robert              Kazda                         9.61      3617
+Marika              Kasalová                      9.59      482
+David               Odstrčil                      9.56      1274
+Zdeněk              Žďárský                       9.54      774
+Jana                Mucha Griščenko               9.53      2321
+Kateřina            Čákorová                      9.47      545
+Martin              Dvořák                        9.40      3328
+Ludmila             Mičjanová                     9.38      2730
+Tara                Bohak                         9.33      584
+Václav              Žoudlík                       9.31      3488
+Jindřich            Činčura                       9.25      4703
+Jaroslav            Krtička                       9.22      2568
+Jan                 Beránek                       9.22      2240
+Miroslav            Hýža                          9.21      651
+Zdeněk              Řeřábek                       9.13      1030
+Libuše              Hybšová                       9.10      1730
+Radim               Přádka                        9.06      3549
+Jan                 Dvořáček                      9.04      1980
+Tibor               Stano                         9.00      2399
+Dobromil            Nováček                       8.96      1193
+Václav              Kosmák                        8.95      1654
+Filip               Karásek                       8.93      1454
+Miloslava           Němečková                     8.93      5022
+Tomáš               Turek                         8.89      981
+Dita                Kubínová                      8.80      1924
+Marek               Poláček                       8.77      3679
+Šárka               Koťátková                     8.67      1665
+Alena               Greplová Starečková           8.67      2001
+Petr                Pohlodek                      8.62      1752
+Eva                 Pašková                       8.61      681
+Milan               Špánik                        8.60      626
+Robin               Ondráček                      8.58      1321
+Kateřina            Holíková                      8.58      1086
+Jakub               Zárybnický                    8.57      1677
+Miloš               Tancibudek                    8.52      2116
+Rostislav           Filgas                        8.51      2977
+Jitka               Kosmáková                     8.46      607
+Markéta             Feiferová                     8.45      476
+Daniel              Ondřej                        8.44      5061
+Jiří                Kejzar                        8.41      1132
+Barbora             Nováková                      8.34      908
+Ondřej              Rydl                          8.34      4084
+Miroslav            Bureš                         8.30      926
+Martin              Kubín                         8.27      1570
+Zuzana              Čejka Šilhánová               8.24      1490
+Lukáš               Hojdan                        8.21      2898
+Vladimír            Hána                          8.20      1609
+Markéta             Skorkovská                    8.18      655
+Vladimíra           Šimáčková                     8.17      1611
+Vendulka            Hrnčiríková                   8.16      334
+Jaroslav            Harvan                        8.13      1125
+Jiří                Stumpf                        8.12      1669
+Lucie               Chvátalová                    8.04      1410
+Tereza              Jendrulková                   7.99      4248
+Duc Anh             Nguyen                        7.98      1321
+Marcel              Gebert                        7.98      2737
+Marek               Hila                          7.97      1426
+Piotr               Szewczyk                      7.93      2336
+Jan                 Musal                         7.91      1542
+Renáta              Mrázová                       7.89      3921
+Jan                 Smělý                         7.81      795
+Lucie               Šabíková                      7.81      2379
+Marek               Bureš                         7.79      764
+Marián              Chladný                       7.79      3219
+Marie               Hýžová                        7.71      2925
+Vlasta              Buryanová                     7.66      795
+Karel               Bank                          7.63      3650
+Jaromír             Bartoš                        7.60      1260
+Michael             Urbášek                       7.58      926
+Aleš                Petráň                        7.48      117
+Zuzana              Dvořáková Šťastná             7.47      934
+Klára               Adamová                       7.46      334
+Radek               Felcman                       7.46      1550
+Jana                Hradilová                     7.42      3029
+Pavel               Grepl                         7.41      1543
+Eva                 Kolářová                      7.39      533
+Jiří                Herůdek                       7.38      654
+Marek               Dědík                         7.37      5909
+Lukáš               Chmelík                       7.32      1831
+Miroslav            Kuchař                        7.27      1146
+Daniel              Maslák                        7.25      1916
+Tomáš               Chmel                         7.23      831
+Martin              Houška                        7.20      3067
+Tomáš               Hošek                         7.14      1512
+Jan                 Tománek                       7.01      1249
+Jiří                Plšek                         7.00      898
+Filip               Gregoriades                   6.99      2210
+Kateřina            Wallová                       6.99      1385
+Peter               Vidašič                       6.97      2304
+Martin              Hejhal                        6.92      152
+Petra               Tirpák Kostovčíková           6.89      544
+Jan                 Kliment                       6.83      1130
+Ondřej              Sliška                        6.82      4399
+Kristýna            Mücková                       6.79      1641
+Eva                 Bartuňková                    6.78      2667
+Vít                 Domorád                       6.77      4678
+Roman               Pecha                         6.63      3813
+Jaroslav            Marek                         6.58      689
+Jana                Novotná                       6.55      2197
+Nikola              Mikesková                     6.49      1432
+Jiří                Pixa                          6.47      1876
+Luboš               Novotný                       6.43      1260
+Simona              Tejcová                       6.39      577
+Róbert              Pavlík                        6.33      829
+Pavel               Skalický                      6.31      334
+Jaroslav            Kučera                        6.29      1055
+Jakub               Dávidek                       6.24      858
+Jan Jakub           Taraba                        6.16      1905
+Juraj               Fáber                         6.14      3092
+Michal              Kladrubský                    6.11      1083
+Adam                Ondřej                        6.05      3348
+Barbora             Kocmanová                     5.97      670
+Lenka               Gebertová                     5.92      2874
+Andrea              Třeštiková                    5.91      922
+Walter              Elschek                       5.82      1092
+Elizaveta           Sluková                       5.80      945
+Jaroslav            Kuneš                         5.79      1465
+Martin              Odstrčil                      5.78      1005
+Miroslav            Horník                        5.77      3683
+Edita               Hagarová                      5.72      569
+Martina             Sudová                        5.70      1892
+Linda               Henzélyová                    5.68      2038
+Anastasia           Eremenko                      5.55      495
+Petr                Bartuněk                      5.33      2027
+Marie               Dvořáková                     5.27      518
+Lenka               Dávidková                     5.25      4159
+Pavel               Sluka                         4.79      920
+Klára               Drhová                        4.68      1125
+Filip               Chmel                         4.16      152
+Pavla               Landsfeldová                  4.05      651
+Michal              Drha                          4.04      840
+Barbora             Surovčíková                   2.55      286
+Marek               Kypús                         2.32      36
+Marek               Buzáš                         1.94      40
+287160
+
+Smolucha                      Doležalová                         81.82         5
+Fried                         Kosmáková                          57.73        30
+Košek                         Drahoňovská                        55.35        15
+Dostál                        Lišková                            51.79        30
+Felcman                       Kosková                            47.88        30
+Vlček                         Příplatová                         45.45         5
+Smolucha                      Zhydovska                          38.18        10
+Bednář                        Rabihová                           37.12        20
+Charvát                       Charvátová                         34.65        10
+Chytil                        Ptáčková                           32.73         5
+Horák                         Tománková                          31.82        10
+Maslák                        Slezáková                          31.67         5
+Zárybnický                    Hegrová                            30.83        10
+Ľos Chovanec                  Hrnčiríková                        28.15        30
+Jodl                          Burešová                           27.50        10
+Routa                         Větrovská                          26.36        10
+Osina                         Pospíšilová                        26.26         9
+Pavlíček                      Trundová                           24.55        10
+Přikryl                       Krejčířová                         21.82        10
+Višnovský                     Čechtická                          21.82        15
+Kolářík                       Kunčáková                          19.39        15
+Metlický                      Kasalová                           18.99       100
+Brožek                        Šimlová                            17.27        10
+Musal                         Kukučová                           17.22        15
+Dohnal                        Horáková                           17.17         9
+Gregoriades                   Kuzmenkova                         16.36        15
+Boldiš                        Pechačová                          16.36         5
+Kapounek                      Králová                            16.36         5
+Zaduban                       Kazdová                            16.36         5
+Špiller                       Stonawská                          15.45        10
+Svoboda                       Petlachová                         14.55         5
+Judas                         Pokorná                            14.55         5
+Majtyka                       Galuszková                         14.55         5
+Juřeník                       Matýsková                          14.55         5
+Král                          Kubíková                           14.31        25
+Mejvald                       Zuzánková                          14.29         5
+Krivošej                      Mrázová                            14.29        10
+Najman                        Říhová                             13.50         6
+Hron                          Kutáčová                           13.33         6
+Melmuk                        Chroumalová                        13.11         9
+Paulíny                       Čákorová                           12.78        15
+Turek                         Bezpalcová                         12.59        15
+Kapitán                       Rudy                               12.27        20
+Skalický                      Holíková                           11.36        20
+Polák                         Skalická                           11.21        30
+Bortlík                       Brožková                           11.12        35
+Pleyer                        Petrušková                         10.30        15
+POSPÍŠIL                      Šumberová                          10.10         9
+Oliva                         Semelová                            9.98        45
+Čech                          Čechová                             9.44         5
+Vait                          Koloušková                          9.03         8
+Sláma                         Slámová                             8.89         5
+Sabol                         Eremenko                            8.75        20
+Hraňo                         Hraňová                             8.57         5
+Kadleček                      Vášová                              8.52        55
+Stano                         Skalková                            8.18        10
+Kehler                        Houserová                           8.18        10
+Jakubes                       Opatrná                             8.18        10
+Balcárek                      Marešová                            7.86        20
+Činčura                       Činčurová                           7.78        10
+Schurmann                     Futerová                            7.78        10
+Legerský                      Dvořáková                           7.73        20
+Ľudma                         Kaucká                              7.64       110
+Ottner                        Jelínková                           7.27        10
+Sýkora                        Bulířová                            7.27        10
+Petr                          Patočková                           7.27        20
+Doležal                       Folcová                             7.01        90
+Martínek                      Duchková                            6.28        60
+Glatzel                       Tcaci                               6.25         8
+Polášek                       Horňáková                           6.23        25
+Kutálek                       Bubeníčková                         6.16        25
+Zlámal                        Zlámalová                           6.12        10
+Nekl                          Nezvedová                           5.72        15
+Roháček                       Fruhwirtová                         5.71        25
+Vild                          Musilová                            5.32        50
+Prouza                        Němcová                             4.85        15
+Vaškovský                     Vaškovská                           4.69        10
+Pospíšil                      Kostenetska                         4.00         9
+Nemec                         Abrahámová                          3.81        20
+Chmel                         Dunajová                            3.79        40
+Havlíček                      Ryšavá                              3.57        20
+Appl                          Applová                             3.56        65
+Plachý                        Paličková                           3.51        25
+Přibyl                        Rumpíková                           3.46        30
+Bushuev                       Nováková                            2.91        25
+Buchmann                      Russová                             2.86        20
+Štětina                       Kocková                             2.73        30
+Horák                         Plná                                2.71        25
+Prágr                         Prágrová                            2.22         5
+Jelínek                       Jancáková                           2.05        40
+Nováček                       Martincová                          1.84        10
+Hudec                         Houserová                           1.74         8
+Zuska                         Janderová                           1.63        15
+JANDA                         KOŤOVÁ                              1.63         5
+Pokorný                       Pokorná                             1.63        15
+Šimko                         Šmrhová                             0.95        15
+Fried                         Vondřejcová                         0.87        50
+Liška                         Fiřtová                             0.82        10
+Vávra                         Houserová                           0.65        25
+Trávníček                     Kučerová                            0.62        18
+Plšek                         Letošníková                         0.53        25
+Jakubec                       Kvasničková                         0.42        20
+Míka                          Hynková                             0.39        15
+Hrazánek                      Jelínková                           0.30        25
+Michálek                      Kopecká                             0.21        30
+Přibyl                        Komáčková                           0.18        20
+Rubáš                         Černá                               0.18        15
+Vlk                           Vlková                              0.17        70
+Babinec                       Siročáková                          0.15        20
+Grossmann                     Ondrušová                           0.14        15
+Vokurka                       Hřebíčková                          0.08        20
+Homolka                       Koloušková                          0.05        25
+Tománek                       Kosmáková                           0.04        15
+Pleyer                        Krejčí                              0.04        50
+Pallas                        Hendrychová                         0.03        70
+Volf                          Dostálová                           0.02        20
+Pejsar                        Plischkeová                         0.02        15
+ANDRŠ                         Kopalová                            0.00         9
+Bejbl                         Beránková                           0.00        10
+Bednařík                      Bednaříková                         0.00         5
+Šáfr                          Macichová                           0.00         8
+Pochylý                       Podgorná                            0.00         5
+Kirnig                        Konečná                             0.00        20
+Kudláč                        Bajgarová                           0.00         5
+Heger                         Prostějovská                        0.00        20
+Skulina                       Kluzová                             0.00         5
+Zeininger                     Kubínová                            0.00        10
+Jehlička                      Jehličková                          0.00        20
+Sznapka                       Toman                               0.00         5
+Tvaroha                       Jirchovská                          0.00        10
+Spáčil                        Kuntošová                           0.00        30
+Kladrubský                    Březinová                           0.00        20
+Berger                        Kubínová                            0.00        15
+Skýba                         Skýbová                             0.00         5
+Matoušek                      Matoušková                          0.00         5
+Benýšek                       Benýšková                           0.00        10
+Sokl                          Woznicová                           0.00         5
+Trunec                        Truncová                            0.00         5
+Deyl                          Bumbálková                          0.00         9
+Tesař                         Teichmannová                        0.00         9
+Kovárník                      Malá                                0.00        15
+Smolucha                      Hrubá                               0.00        30
+Routa                         Lona                                0.00        10
+Jíša                          Jakimičová                          0.00        10
+Lipina                        Matýsková                           0.00        15
+Hadrovský                     Burianová                           0.00        10
+Frkal                         Lososová                            0.00        15
+Kuča                          Hrubá                               0.00        20
+Gál                           Karásková                           0.00        20
+Pisula                        Pisulová                            0.00        10
+Skalický                      Dunajová                            0.00        20
+Nguyen                        Fruhwirtová                         0.00        10
+Zmeškal                       Kalinová                            0.00        10
+Stoklasa                      Beznosova                           0.00         5
+Štrosser                      Štrosserová                         0.00         5
+Stehlík                       Stehlíková                          0.00         5
+Macoun                        Lutovská                            0.00         5
+Bureš                         Smutná                              0.00        10
+Martínek                      Skalická                            0.00        25
+Kušička                       Kušičková                           0.00        10
+Rambousek                     Balíková                            0.00        10
+Mestek                        Starečková                          0.00        10
+Šulc                          Plesarová                           0.00        10
+Novák                         Slámová                             0.00         5
+Riessler                      Hladká                              0.00         5
+Kačerovský                    Brychcínová                         0.00        10
+Mládek                        Cízlerová                           0.00        10
+Březina                       Císařová                            0.00         5
+Vávra                         Kavková                             0.00        10
+Bláha                         Hrubá                               0.00         5
+Marek                         Doležalová                          0.00        10
+Badej                         Ivankova                            0.00        10
+Malčík                        Stoklasová                          0.00        10
+Donát                         Dobruská                            0.00        10
+Tulach                        Přibylová                           0.00         5
+Kapitán                       Vojtášková                          0.00         5
+Novák                         Kosková                             0.00        10
+Helmich                       Růžičková                           0.00        10
+Florian                       Kasalová                            0.00         5
+Munzar                        Mottlová                            0.00         5
+Herman                        Koštovalová                         0.00         5
+Bejr                          Procházková                         0.00        15
+Kiesel                        Pokorná                             0.00        25
+Hošek                         Moravová                            0.00         5
+Makovec                       Borovková                           0.00        20
+Provazník                     Florianová                          0.00        15
+Buzáš                         Slovenčíková                        0.00        10
+Zitko                         Meruňková                           0.00        10
+Odstrčil                      Bohak                               0.00        10
+Kejzar                        Košková                             0.00        10
+Domorád                       Tejcová                             0.00        10
+Pecha                         Banková                             0.00        15
+Jakubčík                      Švábenická                          0.00         5
+Paulík                        Wolfová                             0.00         5
+Wozar                         Zgodová                             0.00         5
+Grepl                         Dobešová                            0.00         5
+Vítek                         Trutnová                            0.00         5
+Zbožínek                      Kolaříková                          0.00         5
+Novotný                       Prokůpková                          0.00         5
+Dolanský                      Dobsová                             0.00         5
+Nešuta                        Lungová                             0.00         5
+Lipowski                      Wrublová                            0.00         5
+Dohnal                        Chalupská                           0.00        10
+Stejskal                      Hadrovská                           0.00        15
+Holý                          Navrátilíková                       0.00         5
+Zeman                         Adamcová                            0.00         5
+Blažek                        Neradová                            0.00        10
+Plzenský                      Majidová                            0.00        10
+Thein                         Fisinger                            0.00        10
+Löfler                        Houžvičková                         0.00        20
+Páral                         Malinovská                          0.00         5
+Konečný                       Švejdová                            0.00         5
+Durchánek                     Šebková                             0.00         5
+Najman                        Houbová                             0.00         5
+Zábranský                     Zábranská                           0.00         5
+Škrob                         Brücková                            0.00         5
+Formánek                      Konečná                             0.00         5
+Jašek                         Vašíčková                           0.00         5
+Paul                          Gazdíková                           0.00        15
+Fišar                         Müllerová                           0.00        15
+Novotný                       Fílová                              0.00        10
+Poláček                       Nováková                           -0.05        20
+Požár                         Kuncová                            -0.14        45
+Hlaváč                        Maturová                           -0.14        15
+Richtár                       Kaszubová                          -0.15        20
+Kozel                         Siročáková                         -0.17        20
+Pavelka                       Patočková                          -0.27        25
+Klápa                         Krásová                            -0.43        15
+Deyl                          Priknerová                         -0.46        18
+Dobruský                      Nováková                           -0.52        60
+Kočař                         Němcová                            -0.68        15
+Giuffrida                     Váňová                             -0.69        40
+Vrablík                       Havlová                            -1.34        65
+Kuntoš                        Kábrtová                           -1.47        80
+Hrtoň                         Vališová                           -1.55        25
+Smolucha                      Kopecká                            -1.59        50
+Pánek                         Březková                           -1.75        12
+Kuneš                         Smrčková                           -1.78         9
+Tureček                       Gottvaldová                        -1.89        40
+Kvaizar                       Vlachynská                         -2.14        25
+Kulhavý                       Kulhavá                            -2.22         5
+Brück                         Makarenko                          -2.24        40
+Trčka                         Kaiserová                          -2.42        30
+Dohnal                        Kozar                              -2.59        30
+Michálek                      Klápová                            -2.60        30
+Brůžek                        Čubanová                           -2.73        12
+Boldiš                        Glistová                           -3.05        30
+Kiršner                       Golombová                          -3.08        60
+Kucharsky                     Vránová                            -3.11        30
+Ponert                        Šimůnková                          -3.12         8
+Svoboda                       Kozar                              -3.25        25
+Sedlář                        Biroščíková                        -3.27         5
+Hladík                        Hudymačová                         -3.27        10
+Valíček                       Jandová                            -3.27         5
+Rambousek                     Bulířová                           -3.64        20
+Prágr                         Bierošová                          -3.64        15
+Taraba                        Řeháková                           -3.72        20
+Ivanov                        Kaiserová                          -3.73        18
+Klíma                         Pšeničková                         -4.29        20
+Baloun                        Businská                           -4.33        12
+Pallas                        Zápotocká                          -4.36        20
+Tojnar                        Jozífová                           -4.46        20
+Havel                         Cihlářová                          -4.85        15
+Pozdíšek                      Dostálová                          -4.85        15
+Huvar                         Marková                            -4.85        15
+Bortlík                       Klokanová                          -4.85        15
+Jančík                        Zmeškalová                         -5.00        15
+Nešuta                        Přibylová                          -5.03        30
+Folprecht                     Bendová                            -5.21        16
+Potužák                       Horníčková                         -5.31         5
+Krček                         Kitlerová                          -5.45        15
+Pařízek                       Kapušňáková                        -5.45        15
+Lampa                         Lampová                            -5.69        15
+Kazda                         Ptáčková                           -5.93        15
+Jandejsek                     Pavlová                            -6.16        15
+Šerák                         Kučová                             -6.28        20
+Piesche                       Kábrtová                           -6.30        25
+Marcín                        Houserová                          -6.42        12
+Kovárník                      Jišková                            -6.47        15
+Kutáč                         Greplová                           -6.78         9
+Havlíček                      Kudrnová                           -7.14        10
+Zieris                        Nešetřilová                        -7.14        20
+Pisula                        Smiešková                          -7.23        30
+Kuča                          Šeráková                           -7.27        15
+Kováč                         Bujnochová                         -7.27        10
+Plecitý                       Řeháková                           -7.27        20
+Doležal                       Klasová                            -7.35        15
+Křelina                       Stádníková                         -7.78        10
+Brich                         Brichová                           -7.78        10
+Nepožitek                     Kuciánová                          -8.18        10
+Novák                         Bulířová                           -8.18        10
+Veverka                       Minaříková                         -8.31        40
+Vengrynský                    Stehnová                           -8.64        20
+Sedlecký                      Beisbierová                        -8.75        18
+Poštulka                      Šalomounová                        -9.09        10
+Táborský                      Křížová                            -9.57        15
+Benýšek                       Benýšková                          -9.68        20
+Pohlodek                      Kunetková                          -9.75        18
+Samek                         Holaňová                           -9.78        18
+Varnuška                      Varnušková                         -9.80         5
+Jalůvka                       Výduchová                         -10.00        15
+Čech                          Čechová                           -11.70        15
+Krejčík                       Loranczyk                         -11.81        35
+Slepička                      Klápová                           -13.15        30
+Tojnar                        Chalupská                         -14.29        10
+Holaza                        Kirnigová                         -14.55        10
+Ratnikov                      Hendrychová                       -14.55         5
+Sokol                         Mužná                             -14.55         5
+Růžička                       Janoušková                        -14.67         6
+Werthaim                      Konszká                           -15.15        15
+Zavodnov                      Větrovská                         -15.54        50
+Cimprich                      Bučová                            -15.71        10
+Lenfeld                       Kramplová                         -15.91        20
+Fajkus                        Fajkusová                         -16.30        15
+Walek                         Koudelová                         -17.75        30
+Maschke                       Pavlíčková                        -18.03        15
+Burant                        Faltusová                         -19.80        35
+Procházka                     Vykydalová                        -20.68        15
+Mylek                         Šimíková                          -21.21        15
+Maslák                        Prokopová                         -22.15        20
+Novák                         Vališová                          -22.42        15
+Poremski                      Homolová                          -22.73        10
+Oswald                        Balíková                          -23.33        10
+Sikora                        Teofilová                         -26.39        20
+Mrázek                        Vykydalová                        -27.01        35
+Svěntý                        Skalková                          -29.61        20
+Pěnkava                       Drekslerová                       -31.67        10
+Hlawiczka                     Škňouřil                          -33.33        15
+Petřík                        Malíková                          -34.57        25
+Zíma                          Nedbailo                          -36.70        15
+Hošek                         Grégrová                          -38.18        10
+Veverka                       Kasálková                         -39.39        15

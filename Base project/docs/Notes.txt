@@ -1,0 +1,43 @@
+Všechny páry
+SELECT Pair.id, man.name, man.surname, woman.name, woman.surname FROM Pair 
+INNER JOIN Person AS man ON Pair.manId = man.id
+INNER JOIN Person AS woman ON Pair.womanId = woman.id;
+
+
+Všichni porotci
+SELECT P.name, P.surname FROM Judge 
+INNER JOIN Person AS P ON P.id = Judge.personId
+
+
+Eventy mezi dvouma datama
+SELECT * FROM Event
+WHERE DATE(Event.date) BETWEEN '2020-10-01' AND '2020-10-03'; 
+
+
+Všechny soutěže mezi 2 datama které porotoval Drha
+SELECT * FROM Comp
+INNER JOIN IsJudging AS IJ ON IJ.compId = Comp.id
+INNER JOIN Person AS P ON P.id = IJ.judgeId
+WHERE DATE(Comp.date) >= '2020-10-01' AND DATE(Comp.date) <='2020-10-03' AND P.id = 10104002;
+
+
+Výsledky jedné soutěže
+SELECT * FROM Result
+INNER JOIN Comp ON Comp.id = Result.compId
+WHERE compId = 15942
+
+
+DELETE FROM IsJudging;
+DELETE FROM Judge;
+DELETE FROM Result;
+DELETE FROM Club;
+DELETE FROM Pair;
+DELETE FROM Comp;
+DELETE FROM Event;
+DELETE FROM Person;
+
+
+
+
+
+

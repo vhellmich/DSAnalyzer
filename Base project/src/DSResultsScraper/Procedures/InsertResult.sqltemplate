@@ -1,0 +1,68 @@
+-- Insert man if no existing negative ID with same name and surname
+INSERT OR IGNORE INTO Person (id, name, surname, state)
+SELECT 
+    CASE 
+        WHEN {manId} <= 0 THEN 
+            COALESCE(
+                (SELECT MIN(id) - 1 FROM Person WHERE id < 0), 
+                -1
+            )
+        ELSE {manId}
+    END,
+    {manName}, 
+    {manSurname}, 
+    {manState}
+WHERE NOT EXISTS (
+    SELECT 1 FROM Person 
+    WHERE name = {manName} AND surname = {manSurname} AND id <= 0
+);
+
+-- Insert woman if no existing negative ID with same name and surname
+INSERT OR IGNORE INTO Person (id, name, surname, state)
+SELECT 
+    CASE 
+        WHEN {womanId} <= 0 THEN 
+            COALESCE(
+                (SELECT MIN(id) - 1 FROM Person WHERE id < 0), 
+                -1
+            )
+        ELSE {womanId}
+    END,
+    {womanName}, 
+    {womanSurname}, 
+    {womanState}
+WHERE NOT EXISTS (
+    SELECT 1 FROM Person 
+    WHERE name = {womanName} AND surname = {womanSurname} AND id <= 0
+);
+
+-- Use CTEs to resolve actual manId and womanId from Person table
+WITH man_cte AS (
+    SELECT id AS man_real_id FROM Person 
+    WHERE name = {manName} AND surname = {manSurname}
+    LIMIT 1
+),
+woman_cte AS (
+    SELECT id AS woman_real_id FROM Person 
+    WHERE name = {womanName} AND surname = {womanSurname}
+    LIMIT 1
+)
+-- Insert pair using resolved IDs
+INSERT OR IGNORE INTO Pair (manId, womanId)
+SELECT man_cte.man_real_id, woman_cte.woman_real_id
+FROM man_cte, woman_cte;
+
+-- Insert club
+INSERT OR IGNORE INTO Club (name)
+VALUES ({clubName});
+
+-- Use combined CTEs for Result insertion
+WITH club_cte AS (
+    SELECT id FROM Club WHERE name = {clubName} LIMIT 1
+),
+pair_id AS (
+    SELECT id FROM Pair WHERE manId = {manId} AND womanId = {womanId} LIMIT 1
+)
+INSERT OR IGNORE INTO Result (compId, pairId, round, dance, clubId, marks, endedFrom, endedTo, endedDance)
+SELECT {compId}, pair_id.id, {round}, {dance}, club_cte.id, {marks}, {endedFrom}, {endedTo}, {endedDance}
+FROM club_cte, pair_id;

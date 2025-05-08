@@ -1,0 +1,11 @@
+INSERT INTO Person (id, name, surname, state)
+VALUES ({id}, {name}, {surname}, {state})
+ON CONFLICT(id) DO NOTHING;
+
+INSERT INTO Judge (personId)
+VALUES ({id})
+ON CONFLICT(personId) DO NOTHING;
+
+INSERT INTO IsJudging (judgeId, compId, [index])
+VALUES ({id}, {compId}, {index})
+ON CONFLICT(judgeId, compId) DO NOTHING;

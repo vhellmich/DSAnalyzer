@@ -1,0 +1,4 @@
+SELECT * FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to} AND clubId = {clubId}
+ORDER BY id

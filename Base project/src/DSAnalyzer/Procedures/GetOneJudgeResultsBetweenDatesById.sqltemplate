@@ -1,0 +1,8 @@
+SELECT res.compId, res.marks, res.endedDance, res.numberOfCouples, res.[round], IsJudging.[index] FROM IsJudging
+INNER join 
+(SELECT * FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+ORDER BY id) AS Res 
+ON Res.compId = IsJudging.compId
+WHERE IsJudging.judgeId = {judgeId}  

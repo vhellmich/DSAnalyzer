@@ -1,0 +1,4 @@
+SELECT Comp.id AS compId, IsJudging.judgeId AS judgeId, IsJudging.[index]  FROM Comp
+INNER JOIN IsJudging ON IsJudging.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+ORDER BY compId, IsJudging.[index]

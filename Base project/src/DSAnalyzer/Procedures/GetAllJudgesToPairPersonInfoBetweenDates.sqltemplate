@@ -1,0 +1,10 @@
+SELECT compId,judgeId,[index],name,surname,state  FROM
+(SELECT Res.compId, judgeId, [index] FROM (SELECT Result.compId,Comp.id  FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to} AND pairId = {pairId}
+ORDER BY id) AS Res
+INNER JOIN IsJudging ON IsJudging.compId = Res.id
+GROUP BY Res.compId, IsJudging.[index]
+ORDER BY res.compId)
+INNER JOIN Person ON Person.id = judgeId
+GROUP BY judgeId

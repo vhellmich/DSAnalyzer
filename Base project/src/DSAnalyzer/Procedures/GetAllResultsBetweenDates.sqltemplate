@@ -1,0 +1,4 @@
+SELECT compId, marks, endedDance, numberOfCouples, round FROM Comp
+INNER JOIN Result ON Result.compId = Comp.id
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+ORDER BY Comp.id

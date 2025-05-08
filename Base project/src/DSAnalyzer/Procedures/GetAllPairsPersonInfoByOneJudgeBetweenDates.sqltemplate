@@ -1,0 +1,11 @@
+SELECT pairId, P1.name AS manName, P1.surname AS manSurname, P1.state AS manState, P2.name AS womanName, P2.surname AS womanSurname, P2.state AS womanState FROM (SELECT pairId FROM 
+(SELECT * FROM IsJudging
+WHERE judgeId = {judgeId}) AS Jud
+INNER JOIN Result ON Result.compId = Jud.compiD
+INNER JOIN Comp ON Comp.id = Jud.compId
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+GROUP BY pairId
+ORDER BY pairId)
+INNER JOIN Pair ON Pair.id = pairId
+INNER JOIN Person AS P1 ON P1.id = Pair.manId
+INNER JOIN Person AS P2 ON P2.id = Pair.womanId

@@ -1,0 +1,9 @@
+SELECT clubId, name FROM (SELECT clubId FROM 
+(SELECT * FROM IsJudging
+WHERE judgeId = {judgeId}) AS Jud
+INNER JOIN Result ON Result.compId = Jud.compiD
+INNER JOIN Comp ON Comp.id = Jud.compId
+WHERE DATE(Comp.date) BETWEEN {from} AND {to}
+GROUP BY clubId
+ORDER BY clubId)
+INNER JOIN Club ON Club.id = clubId

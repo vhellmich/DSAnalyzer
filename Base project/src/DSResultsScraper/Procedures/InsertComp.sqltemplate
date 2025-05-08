@@ -1,0 +1,3 @@
+INSERT INTO  Comp (id, eventId, [date], discipline, category, numberOfDances, numberOfCouples, class)
+VALUES ({id}, {eventId}, {date}, {discipline}, {category}, {numberOfDances}, {numberOfCouples}, {class})
+ON CONFLICT(id) DO NOTHING;

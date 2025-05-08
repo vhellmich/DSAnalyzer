@@ -1,0 +1,8 @@
+{
+  "dependencies": [
+    "curl",
+    "sqlite3",
+    "nlohmann-json",
+    "spdlog"
+  ]
+}
